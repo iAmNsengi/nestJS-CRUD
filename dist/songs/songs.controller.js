@@ -10,13 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SongsController = void 0;
+const songs_service_1 = require("./songs.service");
 const common_1 = require("@nestjs/common");
 let SongsController = class SongsController {
-    addSong() {
-        return 'Add new song endpoint';
+    constructor(songsService) {
+        this.songsService = songsService;
+    }
+    createSong() {
+        return this.songsService.createSong("Do the right things!");
     }
     findAll() {
-        return 'Find All Songs endpoint';
+        return this.songsService.findAll();
     }
     findOne() {
         return 'Find one song endpoint';
@@ -34,7 +38,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], SongsController.prototype, "addSong", null);
+], SongsController.prototype, "createSong", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -60,6 +64,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SongsController.prototype, "deleteSong", null);
 exports.SongsController = SongsController = __decorate([
-    (0, common_1.Controller)('songs')
+    (0, common_1.Controller)('songs'),
+    __metadata("design:paramtypes", [songs_service_1.SongsService])
 ], SongsController);
 //# sourceMappingURL=songs.controller.js.map
