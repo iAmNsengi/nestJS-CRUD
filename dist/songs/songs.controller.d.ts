@@ -2,7 +2,7 @@ import { SongsService } from './songs.service';
 export declare class SongsController {
     private songsService;
     constructor(songsService: SongsService);
-    createSong(): void;
+    createSong(): any[];
     findAll(): any[];
     findOne(): string;
     updateSong(): string;

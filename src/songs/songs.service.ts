@@ -6,6 +6,7 @@ export class SongsService {
 
   createSong(song) {
     this.songs.push(song);
+    return this.songs;
   }
 
   findAll() {

@@ -14,6 +14,7 @@ let SongsService = class SongsService {
     }
     createSong(song) {
         this.songs.push(song);
+        return this.songs;
     }
     findAll() {
         return this.songs;
