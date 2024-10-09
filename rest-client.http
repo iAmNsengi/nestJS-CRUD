@@ -1,3 +1,6 @@
+### DEFAULT ROUTE
+GET http://localhost:3000/
+
 ### FETCH SONGS REQUEST
 GET http://localhost:3000/songs
 
