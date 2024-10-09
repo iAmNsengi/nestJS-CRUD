@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class SongsService {
   private readonly songs = [];
 
-  createSong(song) {
+  create(song) {
     this.songs.push(song);
     return this.songs;
   }

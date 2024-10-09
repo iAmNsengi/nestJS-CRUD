@@ -12,7 +12,7 @@ let SongsService = class SongsService {
     constructor() {
         this.songs = [];
     }
-    createSong(song) {
+    create(song) {
         this.songs.push(song);
         return this.songs;
     }
