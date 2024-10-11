@@ -7,7 +7,7 @@ export class AuthController {
 
   @Post('signup')
   singUp() {
-    return 'I am sign up route';
+    return { msg: 'Hello' };
   }
 
   @Post('signin')
