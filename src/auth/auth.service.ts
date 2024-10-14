@@ -4,13 +4,25 @@ import { AuthDto } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
+const loginError = () => {
+  throw new ForbiddenException('Invalid Credentials');
+};
+
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService) {}
 
-  login() {
-    return { msg: 'I am login' };
+  async login(dto: AuthDto) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        username: dto.username,
+      },
+    });
+    if (!user) loginError();
+    const passwordMatches = await argon.verify(user.password, dto.password);
+    if (!passwordMatches) loginError();
   }
+
   async signup(dto: AuthDto) {
     const hash = await argon.hash(dto.password);
 
@@ -21,9 +33,7 @@ export class AuthService {
           password: hash,
         },
       });
-
       delete newUser.password;
-
       return newUser;
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError)
