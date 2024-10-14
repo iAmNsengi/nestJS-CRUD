@@ -9,5 +9,5 @@ Content-Type: application/json
 
 {
  "username":"nsengi",
- "password":"12"   
+ "password":"" 
 }
