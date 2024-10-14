@@ -23,6 +23,8 @@ export class AuthService {
       },
     });
 
+    delete newUser.password;
+
     // return dtothe saved user
     return newUser;
   }
