@@ -21,6 +21,9 @@ export class AuthService {
     if (!user) loginError();
     const passwordMatches = await argon.verify(user.password, dto.password);
     if (!passwordMatches) loginError();
+
+    delete user.password;
+    return user;
   }
 
   async signup(dto: AuthDto) {

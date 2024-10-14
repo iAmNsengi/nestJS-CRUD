@@ -1,6 +1,13 @@
 
 ### Sign In Route
 POST http://localhost:3333/auth/signin/
+Content-Type: application/json
+
+{
+ "username":"nsengi",
+ "password":"test" ,
+ "id":1
+}
 
 ###
 
