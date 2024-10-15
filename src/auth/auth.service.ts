@@ -28,8 +28,7 @@ export class AuthService {
     const passwordMatches = await argon.verify(user.password, dto.password);
     if (!passwordMatches) loginError();
 
-    delete user.password;
-    return user;
+    return this.signToken(user.id, user.username);
   }
 
   async signup(dto: AuthDto) {
@@ -42,14 +41,14 @@ export class AuthService {
           password: hash,
         },
       });
-      delete newUser.password;
-      return newUser;
+      return this.signToken(newUser.id, newUser.username);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError)
         if (error.code === 'P2002')
           throw new ForbiddenException('Credentials taken');
     }
   }
+
   async signToken(userId: number, username: string): Promise<string> {
     const payload = {
       sub: userId,
