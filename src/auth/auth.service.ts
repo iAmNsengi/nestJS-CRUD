@@ -28,7 +28,11 @@ export class AuthService {
     const passwordMatches = await argon.verify(user.password, dto.password);
     if (!passwordMatches) loginError();
 
-    return this.signToken(user.id, user.username);
+    return {
+      token: this.signToken(user.id, user.username),
+      message: 'Login successful',
+      success: true,
+    };
   }
 
   async signup(dto: AuthDto) {
@@ -41,10 +45,10 @@ export class AuthService {
           password: hash,
         },
       });
-      const token = await this.signToken(newUser.id, newUser.username);
       return {
-        token,
+        token: await this.signToken(newUser.id, newUser.username),
         success: true,
+        message: 'Account created successfully!',
         username: newUser.username,
       };
     } catch (error) {
