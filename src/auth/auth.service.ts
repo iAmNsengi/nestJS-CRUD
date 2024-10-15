@@ -29,7 +29,7 @@ export class AuthService {
     if (!passwordMatches) loginError();
 
     return {
-      token: this.signToken(user.id, user.username),
+      token: await this.signToken(user.id, user.username),
       message: 'Login successful',
       success: true,
     };
