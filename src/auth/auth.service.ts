@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthDto } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { JwtService } from '@nestjs/jwt';
 
 const loginError = () => {
   throw new ForbiddenException('Invalid Credentials');
@@ -10,7 +11,10 @@ const loginError = () => {
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwt: JwtService,
+  ) {}
 
   async login(dto: AuthDto) {
     const user = await this.prisma.user.findUnique({
