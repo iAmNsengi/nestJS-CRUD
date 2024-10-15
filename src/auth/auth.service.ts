@@ -41,8 +41,9 @@ export class AuthService {
           password: hash,
         },
       });
+      const token = await this.signToken(newUser.id, newUser.username);
       return {
-        token: this.signToken(newUser.id, newUser.username),
+        token,
         success: true,
         username: newUser.username,
       };
