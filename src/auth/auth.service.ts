@@ -41,7 +41,11 @@ export class AuthService {
           password: hash,
         },
       });
-      return this.signToken(newUser.id, newUser.username);
+      return {
+        token: this.signToken(newUser.id, newUser.username),
+        success: true,
+        username: newUser.username,
+      };
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError)
         if (error.code === 'P2002')
